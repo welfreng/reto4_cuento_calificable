@@ -1,0 +1,59 @@
+from operator import itemgetter
+
+def quitarCaracteres(texto):
+    caracteres = ['-','¿','?','.',',','¡','!',':','"','–']
+    
+    #convertimos la lista a texto
+    texto = ' '.join(texto)
+    #pasamos los caracteres a minusculas
+    texto = texto.lower()
+    #quitamos los caracteres especiales
+    for i in caracteres:
+        texto = texto.replace(i, '')
+    #convertimos el texto a un a lista el metodo split convierte un texto en lista
+    texto = texto.split()
+    
+    return texto
+
+def contarCaracteres(lista):
+    frecuentes = {}
+    
+    for palabras in lista:
+        if palabras != '':
+            '''
+            llenamos el diccionario y lo llenaos con las palabras repetidasd
+            con la funcion count
+            '''
+            frecuentes[palabras] = lista.count(palabras)
+    
+    #creamos una lista para ordenar las palabras al del diccionario con la funcion sorted ordemanos y en itemgeter a 1 ordena por valor si colocamos 0 ordena por key
+    lista_frecuentes = sorted(frecuentes.items(), key = itemgetter(1), reverse = True)
+    
+    #llenamos la lista de la lista
+   # ordenada = [list(lista_frecuentes[i]) for i in range(len(lista_frecuentes))]
+    
+    
+    ordenada = []
+    for i in range(len(lista_frecuentes)):
+        ordenada.append(list(lista_frecuentes[i]))
+    
+    
+    lista_texto = []
+    for i in range(20):
+        lista_texto.append(ordenada[i])
+    
+    return lista_texto
+
+def main(lista_texto):
+    lista = quitarCaracteres(lista_texto)
+    lista_conteo = contarCaracteres(lista)
+    
+    print(lista_conteo)
+    return lista_conteo
+
+texto = 'Et laudantium minima, ab possimus. fuga et ipsa quod. Quo omnis illo eum voluptas ipsam ut eligendi laborum nam: necessitatibus, similique; ut temporibus reiciendis et enim atque. In eligendi explicabo in sunt velit et voluptatem impedit. Rem autem quas sed ipsam galisum est tempora debitis ut enim quos qui dolores quisquam et quia voluptatem? '
+
+
+#convertimos el texto en una lista
+lista_palabras = texto.split(' ')
+main(lista_palabras)
